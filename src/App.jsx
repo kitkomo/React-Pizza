@@ -1,9 +1,11 @@
 import Header from './components/Header'
 import Categories from './components/Categories'
 import Sort from './components/Sort'
+import Pizza from './components/Pizza'
+
+import pizzas from './assets/pizzas.json'
 
 import './scss/app.scss'
-import Pizza from './components/Pizza'
 
 function App() {
 	return (
@@ -17,7 +19,9 @@ function App() {
 					</div>
 					<h2 className='content__title'>Все пиццы</h2>
 					<div className='content__items'>
-						<Pizza/>
+						{pizzas.map(pizza => (
+							<Pizza key={pizza.id} {...pizza} />
+						))}
 					</div>
 				</div>
 			</div>
