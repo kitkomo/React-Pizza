@@ -1,6 +1,12 @@
 @import '../variables';
 
 .categories {
+	@media (max-width: 800px) {
+		overflow-x: scroll;
+		padding-bottom: 20px;
+		width: 100%;
+	}
+
   ul {
     display: flex;
 
@@ -26,6 +32,19 @@
         background-color: #282828;
         color: #fff;
       }
+
+			@media (max-width: 1600px) {
+				padding: 10px 18px;
+				font-size: 14px;
+			}
+			@media (max-width: 800px) {
+				padding: 6px 14px;
+				font-size: 12px;
+			}
+			@media (max-width: 500px) {
+				padding: 3px 10px;
+				font-size: 10px;
+			}
     }
   }
 }
