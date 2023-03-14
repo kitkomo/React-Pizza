@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
@@ -12,8 +13,12 @@ function Home() {
 	const [isLoading, setIsLoading] = React.useState(true)
 	const [search, setSearch] = React.useState('')
 
-	const skeletons = [...new Array(8)].map((_, index) => <PizzaSkeleton key={index} />)
-	const readyToRenderPizzas = pizzas.map(pizza => <Pizza key={pizza.id} {...pizza} />)
+	const skeletons = [...new Array(8)].map((_, index) => (
+		<PizzaSkeleton key={index} />
+	))
+	const readyToRenderPizzas = pizzas.map(pizza => (
+		<Pizza key={pizza.id} {...pizza} />
+	))
 
 	const activeCategoryId = useSelector(state => state.filter.categoryId)
 	const activeSort = useSelector(state => state.filter.sort)
@@ -24,12 +29,12 @@ function Home() {
 
 	React.useEffect(() => {
 		setIsLoading(true)
-		fetch(
-			`https://640b7d8b65d3a01f981c3e71.mockapi.io/items?${category}&${sort}&${searchQuery}`,
-		)
-			.then(res => res.json())
-			.then(json => {
-				setPizzas(json)
+		axios
+			.get(
+				`https://640b7d8b65d3a01f981c3e71.mockapi.io/items?${category}&${sort}&${searchQuery}`,
+			)
+			.then(res => {
+				setPizzas(res.data)
 				setIsLoading(false)
 			})
 		window.scrollTo(0, 0)
